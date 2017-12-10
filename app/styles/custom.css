@@ -1,0 +1,25 @@
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+:root {
+	--color-black: #000;
+	--color-white: #fff;
+}
+
+body {
+	/* Use system default font */
+	font: caption;
+	
+	/* Disable text selection */
+	user-select: none;
+	-webkit-app-region: drag;
+	
+	/* Fade app in */
+	animation: fadein 1s;
+}

@@ -1,0 +1,6 @@
+# Node
+node_modules/
+
+# App
+app/data/snowboy/
+app/data/keys.json

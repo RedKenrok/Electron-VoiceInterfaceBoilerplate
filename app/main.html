@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+	<head>
+		<meta charset="UTF-8">
+		
+		<title>Voice interface prototype</title>
+		
+		<!-- Styling -->
+		<link rel="stylesheet" href="styles/custom.css">
+	</head>
+	<body>
+		<!-- Input -->
+		<div id="input">
+			<button>Invoke input.record</button>
+		</div>
+		<!-- Additional scipts -->
+		<script type="text/javascript" src="scripts/imports.js"></script>
+		<script type="text/javascript" src="scripts/input.js"></script>
+		<script>
+			// If platform is MacOS or Linux.
+			if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
+				// Log on hot word detection.
+				$('#input').on('hotword', function(event, hotword) {
+					console.log('Hotword detected: ' + hotword + ';');
+				});
+				// Reactivate hot word detection.
+				$('#input').on('received', function(event, response) {
+					input.detect();
+				});
+				
+				// Start detection.
+				input.detect();
+			}
+			
+			$('#input > button').on('click', function(event) {
+				input.record();
+			});
+			// Log the Wit.ai response.
+			$('#input').on('received', function(event, response) {
+				console.log('Wit.ai response: '.concat(JSON.stringify(response)));
+			});
+		</script>
+	</body>
+</html>

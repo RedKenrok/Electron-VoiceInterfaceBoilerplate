@@ -1,0 +1,32 @@
+{
+  "name": "voice-interface-prototype",
+  "productName": "Voice Interface Prototype",
+  "version": "0.0.0",
+  "description": "A voice interface prototype",
+  "keywords": [
+    "voice",
+    "interface",
+    "prototype"
+  ],
+  "author": "",
+  "repository": "https://www.github.com/RedKenrok/electron-voiceinterfaceprototype",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "electron .",
+    "package": "electron-packager ./ Electron-VoiceInterfacePrototype --out dist --version 1.7.5 --overwrite",
+    "postinstall": "electron-rebuild",
+    "electron-rebuild": "electron-rebuild"
+  },
+  "dependencies": {
+    "electron-rebuild": "1.x",
+    "electron-settings": "3.x",
+    "electron-window-state": "4.x",
+    "jquery": "3.x",
+    "node-audiorecorder": "^0.0.3",
+    "node-hotworddetector": "^0.0.4"
+  },
+  "devDependencies": {
+    "electron": "1.x",
+    "electron-packager": "9.x"
+  }
+}
