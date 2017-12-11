@@ -17,27 +17,30 @@
 		<script type="text/javascript" src="scripts/imports.js"></script>
 		<script type="text/javascript" src="scripts/input.js"></script>
 		<script>
-			// If platform is MacOS or Linux.
-			if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
-				// Log on hot word detection.
-				$('#input').on('hotword', function(event, hotword) {
-					console.log('Hotword detected: ' + hotword + ';');
-				});
-				// Reactivate hot word detection.
-				$('#input').on('received', function(event, response) {
+			// When the window has been loaded.
+			$(window).on('load', function() {
+				// If platform is MacOS or Linux.
+				if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
+					// Log on hot word detection.
+					$('#input').on('hotword', function(event, hotword) {
+						console.log('Hotword detected: ' + hotword + ';');
+					});
+					// Reactivate hot word detection.
+					$('#input').on('received', function(event, response) {
+						input.detect();
+					});
+					
+					// Start detection.
 					input.detect();
-				});
+				}
 				
-				// Start detection.
-				input.detect();
-			}
-			
-			$('#input > button').on('click', function(event) {
-				input.record();
-			});
-			// Log the Wit.ai response.
-			$('#input').on('received', function(event, response) {
-				console.log('Wit.ai response: '.concat(JSON.stringify(response)));
+				$('#input > button').on('click', function(event) {
+					input.record();
+				});
+				// Log the Wit.ai response.
+				$('#input').on('received', function(event, response) {
+					console.log('Wit.ai response: '.concat(JSON.stringify(response)));
+				});
 			});
 		</script>
 	</body>

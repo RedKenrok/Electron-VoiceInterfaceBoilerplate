@@ -10,27 +10,34 @@ const input = {};
 	// Kitt.ai Snowboy client wrapper for hot word detection.
 	// Only available for MacOS(darwin) and Linux.
 	if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
-		const HotwordDetection = require('node-hotworddetector');
-		const hotwordDetection = new HotwordDetection([
-			{
-				file: './app/data/snowboy/Ava.pmdl',
-				sensitivity: '0.5',
-				hotwords : 'Ava'
-			}
-		], {
-			resource: './app/data/snowboy/common.res',
-			audioGain: 2
-		}, null);
-		// On hotword event pause detection, invoke the trigger, and start recording.
-		hotwordDetection.on('hotword', function(index, hotword, buffer) {
-			hotwordDetection.pause();
-			input.element.trigger('hotword', [ hotword ]);
-			input.record();
-		});
+		const hotwordConfigurationPath = './app/data/snowboy/configuration.json';
+		const HotwordDetector = require('node-hotworddetector');
+		let hotwordDetector;
+		
+		// Check if file exists.
+		if (fs.existsSync(hotwordConfigurationPath)) {
+			// Parse file to JSON.
+			let hotwordConfiguration = JSON.parse(fs.readFileSync(hotwordConfigurationPath, 'utf8'));
+			// Initialize hotword detector.
+			hotwordDetector = new HotwordDetector(hotwordConfiguration.detector, hotwordConfiguration.models, hotwordConfiguration.recorder);
+			
+			// On hotword event pause detection, invoke the trigger, and start recording.
+			hotwordDetector.on('hotword', function(index, hotword, buffer) {
+				hotwordDetector.pause();
+				input.element.trigger('hotword', [ hotword ]);
+				input.record();
+			});
+		}
+		else {
+			console.warn('Unable to locate configuration.json for snowboy hotword detection.');
+		}
 		
 		// Start hot word detection.
 		input.detect = function() {
-			hotwordDetection.resume();
+			if (!hotwordDetector) {
+				console.error('hotword detector no initialized yet.');
+			}
+			hotwordDetector.resume();
 		}
 	}
 	

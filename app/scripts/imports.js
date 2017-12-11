@@ -5,7 +5,8 @@ const config = require('./config.js');
 // Jquery library.
 global.$ = require('jquery');
 // Node.js modules.
-const os = require('os');
+const fs = require('fs'),
+	os = require('os');
 // Electron module.
 const { remote } = require('electron');
 const { dialog } = remote;
