@@ -1,8 +1,14 @@
 # Electron-VoiceInterfacePrototype
 
 ## Installation
+Download a compressed copy of the project, or evn better run the following command and open up the folder if you have [Git](https://git-scm.com) installed.
 ```
-git clone https://github.com/RedKenrok/Electron-VoiceInterfacePrototype.git
+git clone https://github.com/RedKenrok/Electron-VoiceInterfacePrototype.git && cd Electron-VoiceInterfacePrototype
+```
+
+Make sure [Node.js](htpps://nodejs.org) is installed, this installation will also include [npm.js](htpps://npmjs.org). Run the following command install the project dependencies.
+```
+npm install
 ```
 
 ### Keys
