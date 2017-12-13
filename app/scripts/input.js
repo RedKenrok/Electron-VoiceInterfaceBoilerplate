@@ -45,12 +45,11 @@ const input = {};
 	const WitSpeech = require('./scripts/libs/witSpeech.js');
 	const witSpeechClient = new WitSpeech(require('./data/keys.json').wit, config.wit.version);
 	// Audio recorder.
+	const audioRecorderProgram = (['darwin', 'linux'].indexOf(os.platform()) > -1) ? 'rec' : 'sox';
 	const AudioRecorder = require('node-audiorecorder');
 	const audioRecorder = new AudioRecorder({
-		program: 'rec',
-		sampleRate: 16000,
-		silence: '4.0',
-		threshold: 0.5
+		program: audioRecorderProgram,
+		silence: '4.0'
 	}, console);
 	
 	input.record = function() {
