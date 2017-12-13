@@ -14,19 +14,25 @@
   "scripts": {
     "start": "electron .",
     "package": "electron-packager ./ Electron-VoiceInterfacePrototype --out dist --version 1.7.5 --overwrite",
-    "postinstall": "electron-rebuild",
+    "postinstall": "npmpd && electron-rebuild",
     "electron-rebuild": "electron-rebuild"
   },
   "dependencies": {
-    "electron-rebuild": "1.x",
-    "electron-settings": "3.x",
-    "electron-window-state": "4.x",
-    "jquery": "3.x",
-    "node-audiorecorder": "^0.0.3",
+    "electron-settings": "^3.1.4",
+    "electron-window-state": "^4.1.1",
+    "jquery": "^3.2.1",
+    "node-audiorecorder": "^0.0.3"
+  },
+  "darwinDependencies": {
+    "node-hotworddetector": "^0.0.6"
+  },
+  "linuxDependencies": {
     "node-hotworddetector": "^0.0.6"
   },
   "devDependencies": {
-    "electron": "1.x",
-    "electron-packager": "9.x"
+    "electron": "^1.7.9",
+    "electron-packager": "^10.1.0",
+    "electron-rebuild": "^1.6.0",
+    "npm-platform-dependencies": "^0.0.13"
   }
 }
