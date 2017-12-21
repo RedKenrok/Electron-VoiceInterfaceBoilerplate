@@ -12,7 +12,7 @@ npm install
 ```
 
 ### Audio recording
-For audio recording the module ['node-audiorecorder'](https://github.com/RedKenrok/node-audiorecorder) is used. This requires the usage of the 'rec' command, please make sure this is installed and working. See the previously linked repository for more information.
+For audio recording the module ['node-audiorecorder'](https://github.com/RedKenrok/node-audiorecorder) is used. This requires the usage of the 'rec' or on windows 'sox' command, please make sure this is installed and working. See the previously linked repository for more information.
 
 ### Keys
 Add a file named 'keys.json' to the 'app/data/' directory and add the following information.
