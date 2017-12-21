@@ -7,6 +7,9 @@ module.exports = {
 		about: 'https://'.concat([ package.name, '.RonDekker.nl' ]),
 		repository: 'https://GitHub.com/RedKenrok/'.concat(package.name),		
 	},
+	language: {
+		code: 'en'
+	},
 	wit: {
 		version: '20171207'
 	}

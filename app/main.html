@@ -13,9 +13,14 @@
 		<div id="input">
 			<button>Invoke input.record</button>
 		</div>
+		<!-- output -->
+		<div id="output">
+			
+		</div>
 		<!-- Additional scipts -->
 		<script type="text/javascript" src="scripts/imports.js"></script>
 		<script type="text/javascript" src="scripts/input.js"></script>
+		<script type="text/javascript" src="scripts/output.js"></script>
 		<script>
 			// When the window has been loaded.
 			$(window).on('load', function() {
@@ -23,7 +28,9 @@
 				if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
 					// Log on hot word detection.
 					$('#input').on('hotword', function(event, hotword) {
-						console.log('Hotword detected: ' + hotword + ';');
+						console.log('Hotword detected: ' + hotword);
+						output.speak('Yes');
+						input.record();
 					});
 					// Reactivate hot word detection.
 					$('#input').on('received', function(event, response) {
@@ -34,6 +41,7 @@
 					input.detect();
 				}
 				
+				// Start recording on input button clicked.
 				$('#input > button').on('click', function(event) {
 					input.record();
 				});

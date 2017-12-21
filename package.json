@@ -18,21 +18,19 @@
     "electron-rebuild": "electron-rebuild"
   },
   "dependencies": {
+    "electron": "^1.7.9",
+    "electron-packager": "^10.1.0",
+    "electron-rebuild": "^1.6.0",
     "electron-settings": "^3.1.4",
     "electron-window-state": "^4.1.1",
     "jquery": "^3.2.1",
-    "node-audiorecorder": "^0.0.3"
+    "node-audiorecorder": "^0.0.3",
+    "npm-platform-dependencies": "^0.0.13"
   },
   "darwinDependencies": {
     "node-hotworddetector": "^0.0.6"
   },
   "linuxDependencies": {
     "node-hotworddetector": "^0.0.6"
-  },
-  "devDependencies": {
-    "electron": "^1.7.9",
-    "electron-packager": "^10.1.0",
-    "electron-rebuild": "^1.6.0",
-    "npm-platform-dependencies": "^0.0.13"
   }
 }

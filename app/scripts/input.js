@@ -25,7 +25,6 @@ const input = {};
 			hotwordDetector.on('hotword', function(index, hotword, buffer) {
 				hotwordDetector.pause();
 				input.element.trigger('hotword', [ hotword ]);
-				input.record();
 			});
 		}
 		else {
@@ -50,7 +49,7 @@ const input = {};
 	const audioRecorder = new AudioRecorder({
 		program: audioRecorderProgram,
 		silence: '4.0'
-	}, console);
+	});
 	
 	input.record = function() {
 		// Make web request.
