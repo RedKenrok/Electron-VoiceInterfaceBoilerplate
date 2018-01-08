@@ -24,4 +24,8 @@ const output = {};
 		message.text = transcript;
 		speechSynthesis.speak(message);
 	};
+	// Set speech voice.
+	output.voice = function(voice) {
+		message.voice = voice;
+	};
 }());

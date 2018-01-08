@@ -27,10 +27,11 @@
 				// If platform is MacOS or Linux.
 				if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
 					// Log on hot word detection.
-					$('#input').on('hotword', function(event, hotword) {
+					$('#input').on('hotword', function(event, hotword, buffer) {
+						input.detect(false);
 						console.log('Hotword detected: ' + hotword);
 						output.speak('Yes');
-						input.record();
+						input.record(buffer);
 					});
 					// Reactivate hot word detection.
 					$('#input').on('received', function(event, response) {
@@ -43,6 +44,10 @@
 				
 				// Start recording on input button clicked.
 				$('#input > button').on('click', function(event) {
+					if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
+						// Disable detection.
+						input.detect(false);
+					}
 					input.record();
 				});
 				// Log the Wit.ai response.

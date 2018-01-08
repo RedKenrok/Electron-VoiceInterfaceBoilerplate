@@ -37,7 +37,8 @@ class WitSpeech {
 			headers: {
 				'Authorization': 'Bearer ' + ACCESS_TOKEN,
 				'Accept': 'application/vnd.wit.' + VERSION + '+json',
-				'Content-Type': contentType
+				'Content-Type': contentType,
+				'Transfer-encoding': 'chunked'
 			}
 		}, function(error, response, body) {
 			if (response && response.statusCode != 200) {
@@ -46,6 +47,6 @@ class WitSpeech {
 			callback(error, body);
 		});
 	}
-}
+};
 
 module.exports = WitSpeech;

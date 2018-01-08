@@ -23,16 +23,22 @@ const input = {};
 			
 			// On hotword event pause detection, invoke the trigger, and start recording.
 			hotwordDetector.on('hotword', function(index, hotword, buffer) {
-				hotwordDetector.pause();
-				input.element.trigger('hotword', [ hotword ]);
+				input.element.trigger('hotword', [ hotword, buffer ]);
 			});
 		}
 		else {
 			console.warn('Unable to locate configuration.json for snowboy hotword detection.');
 		}
 		
-		// Start hot word detection.
-		input.detect = function() {
+		// Control hot word detection.
+		input.detect = function(enabled) {
+			// If the detection needs to be disabled.
+			if (enabled != null && enabled === false) {
+				hotwordDetector.pause();
+				return;
+			}
+			
+			// Enables detection otherwise.
 			if (!hotwordDetector) {
 				console.error('hotword detector no initialized yet.');
 			}
@@ -48,10 +54,12 @@ const input = {};
 	const AudioRecorder = require('node-audiorecorder');
 	const audioRecorder = new AudioRecorder({
 		program: audioRecorderProgram,
-		silence: '4.0'
+		silence: '2.0'
 	});
 	
-	input.record = function() {
+	// REMINDERS:
+		// Maximum request of 10 seconds, as set by wit.ai.
+	input.record = function(buffer) {
 		// Make web request.
 		let witSpeechRequest = witSpeechClient.process('audio/wav', {}, function(error, response) {
 			// Stop audio recorder.
@@ -64,7 +72,9 @@ const input = {};
 			input.element.trigger('received', [ response ]);
 		});
 		console.log(witSpeechRequest);
+		
 		// Start audio recorder, and pipe audio stream to the web request.
-		audioRecorder.resume().stream().pipe(witSpeechRequest);
+		audioRecorder.resume().stream()
+			.pipe(witSpeechRequest);
 	};
 }());
