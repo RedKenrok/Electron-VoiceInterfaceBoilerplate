@@ -23,8 +23,7 @@
     "electron-settings": "^3.1.4",
     "electron-window-state": "^4.1.1",
     "jquery": "^3.2.1",
-    "node-audiorecorder": "^0.0.4",
-    "node-hotworddetector": "0.0.6"
+    "node-audiorecorder": "^0.0.4"
   },
   "devDependencies": {
     "electron": "^1.7.9",
