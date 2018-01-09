@@ -10,5 +10,8 @@ module.exports = {
 	language: {
 		code: 'en',
 		region: 'GB'
+	},
+	wit: {
+		version: '20171207'
 	}
 };

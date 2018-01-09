@@ -50,9 +50,9 @@
 					}
 					input.record();
 				});
-				// Log the Wit.ai response.
+				// Listen for a response.
 				$('#input').on('received', function(event, response) {
-					console.log('Wit.ai response: '.concat(JSON.stringify(response)));
+					console.log('API Response: '.concat(JSON.stringify(response)));
 				});
 			});
 		</script>

@@ -1,6 +1,9 @@
 # Node
 node_modules/
+# Because of platform dependencies variations
+package-lock.json
 
 # App
 app/data/snowboy/
 app/data/key-google-cloud.json
+app/data/key-wit-ai.json
