@@ -1,7 +1,5 @@
 # Node
 node_modules/
-# Because of platform dependencies variations
-package-lock.json
 
 # App
 app/data/snowboy/
