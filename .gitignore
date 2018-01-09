@@ -3,4 +3,4 @@ node_modules/
 
 # App
 app/data/snowboy/
-app/data/keys.json
+app/data/key-google-cloud.json

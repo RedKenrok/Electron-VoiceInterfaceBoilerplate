@@ -8,9 +8,7 @@ module.exports = {
 		repository: 'https://GitHub.com/RedKenrok/'.concat(package.name),		
 	},
 	language: {
-		code: 'en'
-	},
-	wit: {
-		version: '20171207'
+		code: 'en',
+		region: 'GB'
 	}
 };

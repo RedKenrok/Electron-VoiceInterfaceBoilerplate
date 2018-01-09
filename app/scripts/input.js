@@ -46,35 +46,64 @@ const input = {};
 		}
 	}
 	
-	// Wit.ai speech web API wrapper for natural language understanding.
-	const WitSpeech = require('./scripts/libs/witSpeech.js');
-	const witSpeechClient = new WitSpeech(require('./data/keys.json').wit, config.wit.version);
 	// Audio recorder.
 	const audioRecorderProgram = (['darwin', 'linux'].indexOf(os.platform()) > -1) ? 'rec' : 'sox';
 	const AudioRecorder = require('node-audiorecorder');
 	const audioRecorder = new AudioRecorder({
 		program: audioRecorderProgram,
 		silence: '2.0'
+	}, console);
+	// Google Cloud Speech.
+	const Speech = require('@google-cloud/speech');
+	let speech = new Speech.SpeechClient({
+		keyFilename: './app/data/key-google-cloud.json'
+	});
+	let request = {
+		config: {
+			encoding: 'LINEAR16',
+			sampleRateHertz: 16000,
+			languageCode: config.language.code + '-' + config.language.region
+		},
+		interimResults: false
+	}
+	// Google Cloud Language.
+	const Language = require('@google-cloud/language');
+	let language = new Language.LanguageServiceClient({
+		keyFilename: './app/data/key-google-cloud.json'
 	});
 	
-	// REMINDERS:
-		// Maximum request of 10 seconds, as set by wit.ai.
 	input.record = function(buffer) {
-		// Make web request.
-		let witSpeechRequest = witSpeechClient.process('audio/wav', {}, function(error, response) {
-			// Stop audio recorder.
-			audioRecorder.stop().stream().unpipe(witSpeechRequest);
-			if (error) {
-				console.warn(error);
-				return;
-			}
-			// Trigger received event.
-			input.element.trigger('received', [ response ]);
-		});
-		console.log(witSpeechRequest);
-		
-		// Start audio recorder, and pipe audio stream to the web request.
+		// Start web stream.
+		let stream = speech.streamingRecognize(request)
+			.on('error', console.error)
+			.on('data', function(data) {
+				console.log(`Transcription: ${data.results[0].alternatives[0].transcript}`);
+				
+				// Start analyzing the entities of the transcript.
+				language.analyzeEntities({
+					document: {
+						content: data.results[0].alternatives[0].transcript,
+						type: 'PLAIN_TEXT'
+					}
+				})
+					.then(function(results) {
+						let entities = results[0].entities;
+						
+						// log results.
+						entities.forEach(entity => {
+							console.log(entity.name);
+							console.log(` - Type: ${entity.type}, Salience: ${entity.salience}`);
+							if (entity.metadata && entity.metadata.wikipedia_url) {
+								console.log(` - Wikipedia URL: ${entity.metadata.wikipedia_url}$`);
+							}
+						  });
+					})
+					.catch(function(error) {
+						console.error('ERROR', error);
+					});
+			});
+		// Start streaming audio to web stream.
 		audioRecorder.resume().stream()
-			.pipe(witSpeechRequest);
+			.pipe(stream);
 	};
 }());

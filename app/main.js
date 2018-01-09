@@ -3,9 +3,6 @@ const electron = require('electron');
 // Get application and browser module.
 const { app, BrowserWindow, Menu, shell } = electron;
 
-// Enable speech synthesis using a chromium flag.
-app.commandLine.appendSwitch('--enable-speech-dispatcher');
-
 // When the app is ready.
 app.on('ready', function() {
 		// Get app config.
