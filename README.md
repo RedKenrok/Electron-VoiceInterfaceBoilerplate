@@ -15,14 +15,28 @@ npm install -save
 For audio recording the module ['node-audiorecorder'](https://github.com/RedKenrok/node-audiorecorder) is used. This requires the usage of the 'rec' or on windows 'sox' command, please make sure this is installed and working. See the previously linked repository for more information.
 
 ### Keys
-Get the required key file from the [Google Cloud platform](https://console.cloud.google.com) as a json file. Rename this file to 'key-google-cloud.json' and add it to the 'app/data/' directory.
+In order to use the speech recognition and natural language processing an online API will be need to be configured so add either a Google Cloud Platform key or Wit.ai key to the data folder. See the two section below for more information.
+
+#### Google Cloud Platform
+Get the key file from the [Google Cloud Platform](https://console.cloud.google.com) as a json file. Rename this file to 'key-google-cloud.json' and add it to the 'app/data/' directory.
 
 > For more information see step 1 through 3 of the quickstart guide of the [Speech API](https://github.com/googleapis/nodejs-speech/#quickstart) and [Language API](https://github.com/googleapis/nodejs-language/#quickstart).
+
+#### Wit.ai
+Get the Access tokens from the [Wit.ai](https://wit.ai) site and add them to a file named 'key-wit-ai.json' in the 'app/data/' directory.
+
+```JSON
+{
+  "app_id": "App ID",
+  "server": "Server Access Token",
+  "client": "Client Access Token"
+}
+```
 
 ### Hotword detection
 If you want to use [snowboy](https://snowboy.kitt.ai)'s hotword detection and are running MacOS or a compatible Linux distro then add a file named 'configuration.json' to the 'app/data/snowboy/' directory and add the following information.
 
-```
+```JSON
 {
   "detector": {
     "resource": "./node_modules/snowboy/resources/common.res"
