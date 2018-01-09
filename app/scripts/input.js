@@ -51,7 +51,7 @@ const input = {};
 	const AudioRecorder = require('node-audiorecorder');
 	const audioRecorder = new AudioRecorder({
 		program: audioRecorderProgram,
-		silence: '2.0'
+		silence: 2
 	}, console);
 	// Google Cloud Speech.
 	const Speech = require('@google-cloud/speech');
@@ -73,6 +73,13 @@ const input = {};
 	});
 	
 	input.record = function(buffer) {
+		console.log('start recording');
+		// Start streaming audio to web stream.
+		audioRecorder.resume().stream();
+		audioRecorder.stream().on('data', function(data) {
+			console.log('receiving data');
+		});
+		/*
 		// Start web stream.
 		let stream = speech.streamingRecognize(request)
 			.on('error', console.error)
@@ -105,5 +112,6 @@ const input = {};
 		// Start streaming audio to web stream.
 		audioRecorder.resume().stream()
 			.pipe(stream);
+		*/
 	};
 }());
