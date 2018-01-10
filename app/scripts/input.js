@@ -48,9 +48,10 @@ const input = {};
 	
 	// Audio recorder.
 	const AudioRecorder = require('node-audiorecorder');
-	const audioRecorder = new AudioRecorder({
-		silence: 2
-	}, console);
+	let audioRecorder = new AudioRecorder({
+		silence: 2,
+		threshold: 0.5
+	});
 	
 	// Key paths
 	const KEYPATH_GOOGLECLOUD = './app/keys/google-cloud.json',
@@ -61,7 +62,7 @@ const input = {};
 		// Google Cloud Speech.
 		const Speech = require('@google-cloud/speech');
 		const speech = new Speech.SpeechClient({
-			keyFilename: JSON.parse(fs.readFileSync(KEYPATH_GOOGLECLOUD, 'utf8'))
+			keyFilename: KEYPATH_GOOGLECLOUD
 		});
 		// Setup speech request.
 		const speechRequest = {
@@ -75,7 +76,7 @@ const input = {};
 		// Google Cloud Language.
 		const Language = require('@google-cloud/language');
 		const language = new Language.LanguageServiceClient({
-			keyFilename: JSON.parse(fs.readFileSync(KEYPATH_GOOGLECLOUD, 'utf8'))
+			keyFilename: KEYPATH_GOOGLECLOUD
 		});
 		
 		// Record function.
@@ -148,15 +149,13 @@ const input = {};
 		}
 	}
 	// If no service configured display a warning message.
-	else if (service !== SERVICE_GOOGLE && service !== SERVICE_WIT) {
+	else {
 		console.warn('No speech processing service configured, see the keys section of the README.md file for how to set this up.');
 		
 		// Record function.
 		input.record = function(buffer) {
-			console.log('start recording');
 			// Start streaming audio to web stream.
-			audioRecorder.resume().stream();
-			audioRecorder.stream().on('data', function(data) {
+			audioRecorder.resume().stream().on('data', function(data) {
 				console.log('receiving data');
 			});
 		};

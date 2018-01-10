@@ -3,5 +3,4 @@ node_modules/
 
 # App
 app/data/snowboy/
-app/keys/google-cloud.json
-app/keys/wit-ai.json
+app/keys/
