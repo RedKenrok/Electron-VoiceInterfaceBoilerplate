@@ -53,8 +53,8 @@ const input = {};
 	}, console);
 	
 	// Key paths
-	const KEYPATH_GOOGLECLOUD = './app/data/key-google-cloud.json',
-		  KEYPATH_WITAI = './app/data/key-wit-ai.json';
+	const KEYPATH_GOOGLECLOUD = './app/keys/google-cloud.json',
+		  KEYPATH_WITAI = './app/keys/wit-ai.json';
 	
 	// Google Cloud Platform
 	if (fs.existsSync(KEYPATH_GOOGLECLOUD)) {
