@@ -24,9 +24,8 @@
 		<script>
 			// When the window has been loaded.
 			$(window).on('load', function() {
-				/*
 				// If platform is MacOS or Linux.
-				if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
+				if ([ 'darwin', 'linux' ].indexOf(os.platform()) > -1) {
 					// Log on hot word detection.
 					$('#input').on('hotword', function(event, hotword, buffer) {
 						input.detect(false);
@@ -41,7 +40,7 @@
 					
 					// Start detection.
 					input.detect();
-				}*/
+				}
 				
 				// Start recording on input button clicked.
 				$('#input > button').on('click', function(event) {

@@ -21,7 +21,7 @@ const input = {};
 			// Initialize hotword detector.
 			hotwordDetector = new HotwordDetector(hotwordConfiguration.detector, hotwordConfiguration.models, hotwordConfiguration.recorder);
 			
-			// On hotword event pause detection, invoke the trigger, and start recording.
+			// On hotword event invoke the trigger.
 			hotwordDetector.on('hotword', function(index, hotword, buffer) {
 				input.element.trigger('hotword', [ hotword, buffer ]);
 			});
@@ -34,7 +34,7 @@ const input = {};
 		input.detect = function(enabled) {
 			// If the detection needs to be disabled.
 			if (enabled != null && enabled === false) {
-				hotwordDetector.pause();
+				hotwordDetector.stop();
 				return;
 			}
 			
@@ -42,7 +42,7 @@ const input = {};
 			if (!hotwordDetector) {
 				console.error('hotword detector no initialized yet.');
 			}
-			hotwordDetector.resume();
+			hotwordDetector.start();
 		}
 	}
 	
@@ -50,7 +50,10 @@ const input = {};
 	const AudioRecorder = require('node-audiorecorder');
 	let audioRecorder = new AudioRecorder({
 		silence: 2,
-		threshold: 0.5
+		threshold: 0.35
+	}, console);
+	audioRecorder.on('close', function(exitCode) {
+		audioRecorder.stop();
 	});
 	
 	// Key paths
@@ -114,7 +117,7 @@ const input = {};
 						});
 				});
 			// Start streaming audio to web stream.
-			audioRecorder.resume().stream()
+			audioRecorder.start().stream()
 				.pipe(stream);
 		};
 	}
@@ -144,7 +147,7 @@ const input = {};
 				input.element.trigger('received', [ response ]);
 			});
 			// Start audio recorder, and pipe audio stream to the web request.
-			audioRecorder.resume().stream()
+			audioRecorder.start().stream()
 				.pipe(witSpeechRequest);
 		}
 	}
@@ -155,7 +158,7 @@ const input = {};
 		// Record function.
 		input.record = function(buffer) {
 			// Start streaming audio to web stream.
-			audioRecorder.resume().stream().on('data', function(data) {
+			audioRecorder.start().stream().on('data', function(data) {
 				console.log('receiving data');
 			});
 		};
