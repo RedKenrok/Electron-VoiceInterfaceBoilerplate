@@ -24,7 +24,6 @@
     "electron-window-state": "^4.1.1",
     "jquery": "^3.2.1",
     "node-audiorecorder": "^1.1.0",
-    "node-hotworddetector": "^1.1.0",
     "witspeech": "0.0.1"
   },
   "devDependencies": {
