@@ -9,7 +9,7 @@ const input = {};
 	
 	// Kitt.ai Snowboy client wrapper for hot word detection.
 	// Only available for MacOS(darwin) and Linux.
-	if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
+	if ([ 'darwin', 'linux' ].indexOf(os.platform()) > -1) {
 		let hotwordConfigurationPath = './app/data/snowboy/configuration.json';
 		const HotwordDetector = require('node-hotworddetector');
 		let hotwordDetector;
@@ -49,9 +49,10 @@ const input = {};
 	// Audio recorder.
 	const AudioRecorder = require('node-audiorecorder');
 	let audioRecorder = new AudioRecorder({
+		program: [ 'win32' ].indexOf(os.platform()) > -1 ? 'sox' : 'rec', // Use sox on windows else use rec.
 		silence: 2,
 		threshold: 0.35
-	}, console);
+	});
 	audioRecorder.on('close', function(exitCode) {
 		audioRecorder.stop();
 	});
@@ -140,7 +141,7 @@ const input = {};
 			// Create web request.
 			let witSpeechRequest = witSpeech.request('audio/wav', {}, function(error, response) {
 				if (error) {
-					console.error('ERROR', error);
+					console.error('Error', error, 'Code', response.code, ', ', response.error);
 					return;
 				}
 				// Trigger received event.
@@ -159,7 +160,7 @@ const input = {};
 		input.record = function(buffer) {
 			// Start streaming audio to web stream.
 			audioRecorder.start().stream().on('data', function(data) {
-				console.log('receiving data');
+				console.log('Receiving microphone data');
 			});
 		};
 	}

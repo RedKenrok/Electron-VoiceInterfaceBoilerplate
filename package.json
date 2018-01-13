@@ -1,19 +1,19 @@
 {
-  "name": "voice-interface-prototype",
-  "productName": "Voice Interface Prototype",
+  "name": "voice-interface-boilerplate",
+  "productName": "Voice Interface Boilerplate",
   "version": "0.0.0",
-  "description": "A voice interface prototype",
+  "description": "A voice interface boilerplate",
   "keywords": [
     "voice",
     "interface",
-    "prototype"
+    "boilerplate"
   ],
   "author": "",
-  "repository": "https://www.github.com/RedKenrok/electron-voiceinterfaceprototype",
+  "repository": "https://www.github.com/RedKenrok/electron-voiceinterfaceboilerplate",
   "main": "app/main.js",
   "scripts": {
     "start": "electron .",
-    "package": "electron-packager ./ Electron-VoiceInterfacePrototype --out dist --version 1.7.5 --overwrite",
+    "package": "electron-packager ./ Electron-VoiceInterfaceBoilerplate --out dist --version 1.7.5 --overwrite",
     "postinstall": "npmpd && electron-rebuild",
     "rebuild": "electron-rebuild"
   },
@@ -23,7 +23,8 @@
     "electron-settings": "^3.1.4",
     "electron-window-state": "^4.1.1",
     "jquery": "^3.2.1",
-    "node-audiorecorder": "^1.0.4",
+    "node-audiorecorder": "^1.1.0",
+    "node-hotworddetector": "^1.1.0",
     "witspeech": "0.0.1"
   },
   "devDependencies": {
@@ -33,9 +34,9 @@
     "npm-platform-dependencies": "^0.0.13"
   },
   "darwinDependencies": {
-    "node-hotworddetector": "^1.0.4"
+    "node-hotworddetector": "^1.1.0"
   },
   "linuxDependencies": {
-    "node-hotworddetector": "^1.0.4"
+    "node-hotworddetector": "^1.1.0"
   }
 }
