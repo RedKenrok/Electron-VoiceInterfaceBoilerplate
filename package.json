@@ -22,6 +22,7 @@
     "@google-cloud/speech": "^1.0.0",
     "electron-settings": "^3.1.4",
     "electron-window-state": "^4.1.1",
+    "googlesynthesis": "^0.0.1",
     "jquery": "^3.2.1",
     "node-audiorecorder": "^1.1.0",
     "witspeech": "0.0.1"

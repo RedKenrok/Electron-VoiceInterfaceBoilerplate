@@ -29,7 +29,6 @@
 					// Log on hot word detection.
 					$('#input').on('hotword', function(event, hotword, buffer) {
 						input.detect(false);
-						console.log('Hotword detected: ' + hotword);
 						output.speak('Yes');
 						input.record(buffer);
 					});

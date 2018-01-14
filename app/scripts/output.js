@@ -7,25 +7,32 @@ const output = {};
 	// Get associated html element.
 	output.element = $('#output');
 	
-	// Speech synthesis.
-	const speechSynthesis = window.speechSynthesis;
-	// Message.
-	const message = new SpeechSynthesisUtterance();
-	message.lang = config.language.code;
+	// Google Synthesis module.
+	const GoogleSynthesis = require('./scripts/libs/googlesynthesis/index.js');
+	const googleSynthesis = new GoogleSynthesis(true);
 	
-	// When the message is finished.
-	message.onend = function(event) {
-		output.element.trigger('end', [ message.text ]);
-	};
+	// Audio player.
+	const audio = new Audio();
 	
-	// Start the speech synthesis.
-	output.speak = function(transcript) {
-		console.log('Output.speak: ' + transcript);
-		message.text = transcript;
-		speechSynthesis.speak(message);
-	};
-	// Set speech voice.
-	output.voice = function(voice) {
-		message.voice = voice;
-	};
+	output.speak = function(transcript, language, speed) {
+		let urls = googleSynthesis.request(transcript, language, speed);
+		
+		// Setup listener so it cycles through playing each url.
+		let index = 0;
+		audio.addEventListener('ended', function() {
+			index++;
+			
+			if (index >= urls.length) {
+				audio.removeEventListener('event', this);
+				return;
+			}
+			
+			audio.src = urls[index];
+			audio.play();
+		});
+		
+		// Set first source.
+		audio.src = urls[index];
+		audio.play();
+	}
 }());
