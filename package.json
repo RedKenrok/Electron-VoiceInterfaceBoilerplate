@@ -32,9 +32,9 @@
     "npm-platform-dependencies": "^0.0.13"
   },
   "darwinDependencies": {
-    "node-hotworddetector": "^1.1.0"
+    "node-hotworddetector": "^1.1.1"
   },
   "linuxDependencies": {
-    "node-hotworddetector": "^1.1.0"
+    "node-hotworddetector": "^1.1.1"
   }
 }
