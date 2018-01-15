@@ -5,10 +5,10 @@ const output = {};
 	'use strict';
 	
 	// Get associated html element.
-	output.element = $('#output');
+	output.element = document.getElementById('output');
 	
 	// Google Synthesis module.
-	const GoogleSynthesis = require('./scripts/libs/googlesynthesis/index.js');
+	const GoogleSynthesis = require('googlesynthesis');
 	const googleSynthesis = new GoogleSynthesis(true);
 	
 	// Audio player.

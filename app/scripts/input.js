@@ -5,7 +5,7 @@ const input = {};
 	'use strict';
 	
 	// Get associated html element.
-	input.element = $('#input');
+	input.element = document.getElementById('input');
 	
 	// Kitt.ai Snowboy client wrapper for hot word detection.
 	// Only available for MacOS(darwin) and Linux.
@@ -21,9 +21,16 @@ const input = {};
 			// Initialize hotword detector.
 			hotwordDetector = new HotwordDetector(hotwordConfiguration.detector, hotwordConfiguration.models, hotwordConfiguration.recorder);
 			
-			// On hotword event invoke the trigger.
+			// On hotword detection invoke the event.
 			hotwordDetector.on('hotword', function(index, hotword, buffer) {
-				input.element.trigger('hotword', [ hotword, buffer ]);
+				input.element.dispatchEvent(
+					new CustomEvent('hotword', {
+						detail : {
+							index: index,
+							hotword: hotword,
+							buffer: buffer
+						}})
+					);
 			});
 		}
 		else {
@@ -110,8 +117,13 @@ const input = {};
 								}
 							});
 							
-							// Trigger received event.
-							input.element.trigger('received', [ results[0].entities ]);
+							// Invoke received event.
+							input.element.dispatchEvent(
+								new CustomEvent('received', {
+									detail : {
+										response: results[0].entities
+									}})
+								);
 						})
 						.catch(function(error) {
 							console.error('ERROR', error);
@@ -144,8 +156,14 @@ const input = {};
 					console.error('Error', error, 'Code', response.code, ', ', response.error);
 					return;
 				}
-				// Trigger received event.
-				input.element.trigger('received', [ response ]);
+				
+				// Invoke received event.
+				input.element.dispatchEvent(
+					new CustomEvent('received', {
+						detail : {
+							response: response
+						}})
+					);
 			});
 			// Start audio recorder, and pipe audio stream to the web request.
 			audioRecorder.start().stream()

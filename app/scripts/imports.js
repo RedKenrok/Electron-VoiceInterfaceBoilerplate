@@ -2,13 +2,9 @@
 
 // Configuration data.
 const config = require('./config.js');
-// Jquery library.
-global.$ = require('jquery');
 // Node.js modules.
 const fs = require('fs'),
 	os = require('os');
 // Electron module.
-const { remote } = require('electron');
-const { dialog } = remote;
-// Other modules.
-const settings = require('electron-settings');
+const remote = require('electron').remote;
+const dialog = remote.dialog;

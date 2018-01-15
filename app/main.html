@@ -23,17 +23,17 @@
 		<script type="text/javascript" src="scripts/output.js"></script>
 		<script>
 			// When the window has been loaded.
-			$(window).on('load', function() {
+			document.addEventListener("DOMContentLoaded", function() {
 				// If platform is MacOS or Linux.
 				if ([ 'darwin', 'linux' ].indexOf(os.platform()) > -1) {
 					// Log on hot word detection.
-					$('#input').on('hotword', function(event, hotword, buffer) {
+					input.element.addEventListener('hotword', function(event, hotword, buffer) {
 						input.detect(false);
 						output.speak('Yes');
 						input.record(buffer);
 					});
 					// Reactivate hot word detection.
-					$('#input').on('received', function(event, response) {
+					input.element.addEventListener('received', function(event, response) {
 						input.detect();
 					});
 					
@@ -42,7 +42,7 @@
 				}
 				
 				// Start recording on input button clicked.
-				$('#input > button').on('click', function(event) {
+				input.element.querySelector('button').addEventListener('click', function(event) {
 					if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
 						// Disable detection.
 						input.detect(false);
@@ -50,8 +50,8 @@
 					input.record();
 				});
 				// Listen for a response.
-				$('#input').on('received', function(event, response) {
-					console.log('API Response: '.concat(JSON.stringify(response)));
+				input.element.addEventListener('received', function(event, response) {
+					console.log('API Response: ' + JSON.stringify(response));
 				});
 			});
 		</script>
