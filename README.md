@@ -34,7 +34,7 @@ Get the Access tokens from the [Wit.ai](https://wit.ai) site and add them to a f
 ```
 
 ### Hotword detection
-If you want to use [snowboy](https://snowboy.kitt.ai)'s hotword detection and are running MacOS or a compatible Linux distro then add a file named 'configuration.json' to the 'app/data/snowboy/' directory and add the following information.
+If you want to use [snowboy](https://snowboy.kitt.ai)'s hotword detection and are running MacOS or a compatible Linux distro then add a file named 'hotworddetector.json' to the 'app/data/' directory and add the following information.
 
 ```JSON
 {

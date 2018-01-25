@@ -14,8 +14,8 @@ const output = {};
 	// Audio player.
 	const audio = new Audio();
 	
-	output.speak = function(transcript, language, speed) {
-		let urls = googleSynthesis.request(transcript, language, speed);
+	output.speak = function(transcript, language, voice, speed, pitch, volume) {
+		let urls = googleSynthesis.request(transcript, language, voice, speed, pitch, volume);
 		
 		// Setup listener so it cycles through playing each url.
 		let index = 0;

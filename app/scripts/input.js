@@ -10,7 +10,7 @@ const input = {};
 	// Kitt.ai Snowboy client wrapper for hot word detection.
 	// Only available for MacOS(darwin) and Linux.
 	if ([ 'darwin', 'linux' ].indexOf(os.platform()) > -1) {
-		let hotwordConfigurationPath = './app/data/snowboy/configuration.json';
+		let hotwordConfigurationPath = './app/data/hotworddetector.json';
 		const HotwordDetector = require('node-hotworddetector');
 		let hotwordDetector;
 		
