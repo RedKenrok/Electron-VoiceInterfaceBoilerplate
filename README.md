@@ -8,7 +8,7 @@ git clone https://github.com/RedKenrok/Electron-VoiceInterfaceBoilerplate.git &&
 
 Make sure [Node.js](htpps://nodejs.org) is installed, this installation will also include [Npm.js](htpps://npmjs.org). Run the following command install the project dependencies.
 ```
-npm install -save
+npm install --save
 ```
 
 ### Audio recording
@@ -67,4 +67,4 @@ If you are on windows and have errors during the post install phase when rebuild
 4. Restart the device for the environmental path to take effect.
 5. Remove the node_modules directory of the project.
 6. Reinstall the dependencies.
-> npm i -save
+> npm i --save
