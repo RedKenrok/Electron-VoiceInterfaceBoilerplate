@@ -93,7 +93,7 @@ const input = {};
 		// Record function.
 		input.record = function(buffer) {
 			// Start web stream.
-			let stream = speech.streamingRecognize(request)
+			let stream = speech.streamingRecognize(speechRequest)
 				.on('error', console.error)
 				.on('data', function(data) {
 					console.log(`Transcription: ${data.results[0].alternatives[0].transcript}`);
